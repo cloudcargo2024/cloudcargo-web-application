@@ -1,9 +1,12 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 
 
+.main{
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .App {
   text-align: center;
