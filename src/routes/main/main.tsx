@@ -1,3 +1,9 @@
-export default function Main() {
-  return <h1>Hello</h1>;
+import MapAP from "../components/MapAP";
+
+export default function Success() {
+  return (
+    <>
+      <MapAP />
+    </>
+  );
 }
