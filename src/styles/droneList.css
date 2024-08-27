@@ -1,0 +1,25 @@
+ol {
+    border: 3px solid;
+    position: absolute;
+    right: 30px;
+}
+
+.red {
+    list-style-type: none;
+    color: red;
+}
+
+.green {
+    list-style-type: none;
+    color: green;
+}
+
+.orange {
+    list-style-type: none;
+    color: orange;
+}
+
+.dark {
+    list-style-type: none;
+    color: darkred;
+}
