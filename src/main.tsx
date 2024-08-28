@@ -17,35 +17,28 @@ const drones: Drone[] = [
     }
 ];
 
-function Main() {
-    let list = [];
-    for(let i = 0; i < drones.length; i++) {
-        if(drones[i].status === "parked") {
-            list[i] = <li className="green">
-                {drones[i].id} - {drones[i].status};
-            </li>
-        }
-        else if(drones[i].status === "delivering") {
-            list[i] = <li className="red">
-                {drones[i].id} - {drones[i].status};
-            </li>
-        }
-        else if(drones[i].status === "returning") {
-            list[i] = <li className="orange">
-                {drones[i].id} - {drones[i].status};
-            </li>
-        }
-        else {
-            list[i] = <li className="dark">
-                {drones[i].id} - {drones[i].status};
-            </li>
-        }
+function getClassName(status: string) {
+    switch(status) {
+        case "parked":
+            return "green";
+        case "delivering":
+            return "red";
+        case "returning":
+            return "orange";
     }
+}
+
+function Main() {
+    const dronesList = drones.map((drone, index) => (
+        <li key={index} className={getClassName(drone.status)}>
+            {drone.id} - {drone.status}
+        </li>
+    ));
 
     return (
-      <ol className='ol'>
-        {list}
-      </ol>
+      <ul className='ol'>
+        {dronesList}
+      </ul>
     );
   }
 
