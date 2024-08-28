@@ -5,7 +5,7 @@
 
 ### **Hey there! You have just stumbled upon a pretty ambitious project, so bear with me for a second :))**
 
-This web application is part of a larger project that utilizes **drones to deliver essential supplies during rescue operations.** You can **learn more** about that [here](https://www.instagram.com/p/C9ksqlWsc1P/?igsh=MTBkemp3Nmc3dWJrZQ==):  
+This web application is part of a larger project that utilizes **drones to deliver essential supplies during rescue operations.** You can **learn more** about that [here](https://www.instagram.com/p/C9ksqlWsc1P/?igsh=MTBkemp3Nmc3dWJrZQ==);  
 
 The application is designed to provide **a straightforward and user-friendly interface for monitoring and managing drones.**
 
@@ -36,7 +36,7 @@ The application is designed to provide **a straightforward and user-friendly int
  - **macOs:** [https://git-scm.com/download/mac](https://git-scm.com/download/mac)
 
     
-### `Install VSC as ide`
+### `Install VSC as IDE`
  - **Windows, macOs:** [https://code.visualstudio.com/](https://code.visualstudio.com/)
     
 ### `Install Node`
@@ -55,3 +55,14 @@ The application is designed to provide **a straightforward and user-friendly int
 3.   **`npm start`**
 
 ### You should be set now!
+
+## Useful Links 
+- [**Git cheat sheet**](https://www.atlassian.com/git/tutorials/atlassian-git-cheatsheet) 
+- [**Git game**](https://learngitbranching.js.org/)
+- [**FE roadmap**](https://roadmap.sh/frontend)
+- [**React Docs**](https://react.dev/learn) *(functional components and typescript)*
+- [**FlexBox game**](https://flexboxfroggy.com)
+- [**Postman**](https://www.postman.com/)
+- [**Http methods**](https://www.w3schools.com/tags/ref_httpmethods.asp)
+- [**Http response codes**](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)
+- [**Create your own apis**](https://beeceptor.com/docs/sample-api-for-testing/)
