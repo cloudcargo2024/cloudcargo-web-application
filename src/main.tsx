@@ -1,7 +1,8 @@
 import React from 'react';
-import './styles/droneList.css'
+import './styles/droneList.css';
+import './models.tsx';
 
-const drones = [
+const drones: Drone[] = [
     {
         id: 0,
         status: "parked"
@@ -13,10 +14,6 @@ const drones = [
     {
         id: 2,
         status: "returning"
-    },
-    {
-        id: 3,
-        status: "undefined"
     }
 ];
 
