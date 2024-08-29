@@ -1,25 +1,30 @@
 ul {
-    border: 3px solid;
     position: absolute;
-    right: 30px;
+    right: 200px;
+    list-style: none;
+}
+
+li {
+    border-style: none none none solid;
+
 }
 
 .red {
-    list-style-type: none;
-    color: red;
+    border-color: red;
+    background-color: rgba(255, 0, 0, 0.226);
 }
 
 .green {
-    list-style-type: none;
-    color: green;
+    border-color: green;
+    background-color: rgba(0, 128, 0, 0.226);
 }
 
 .orange {
-    list-style-type: none;
-    color: orange;
+    border-color: orange;
+    background-color: rgba(255, 166, 0, 0.226);
 }
 
 .dark {
-    list-style-type: none;
-    color: darkred;
+    border-color: darkslategrey;
+    background-color: rgba(139, 0, 0, 0.226);
 }

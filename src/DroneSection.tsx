@@ -5,17 +5,33 @@ import './models.tsx';
 const drones: Drone[] = [
     {
         id: 0,
-        status: "parked"
+        status: "parked",
+        size: "small",
+        x: 0.5, y: 0, z: 0
     },
     {
         id: 1,
-        status: "delivering"
+        status: "delivering",
+        size: "small",
+        x: 0, y: 0, z: 0
     },
     {
         id: 2,
-        status: "returning"
+        status: "returning",
+        size: "small",
+        x: 0, y: 0, z: 0
     }
 ];
+
+function showCoordinates(x: number, y: number, z: number) {
+    return (
+        <head>
+            <div>x: {x}</div>
+            <div>y: {y}</div>
+            <div>z: {z}</div>
+        </head>
+    );
+}
 
 function getClassName(status: string) {
     switch(status) {
@@ -28,10 +44,11 @@ function getClassName(status: string) {
     }
 }
 
-function Main() {
-    const dronesList = drones.map((drone, index) => (
-        <li key={index} className={getClassName(drone.status)}>
-            {drone.id} - {drone.status}
+function MainDrones() {
+    const dronesList = drones.map((drone, index, size) => (
+        <li onMouseOver="showCoordinates(drone.x, drone.y, drone.z)" key={index} className={getClassName(drone.status)}>
+            <div>Drone#{drone.id}-{drone.size}</div>
+            <div>{drone.status}</div>
         </li>
     ));
 
@@ -42,4 +59,4 @@ function Main() {
     );
   }
 
-export default Main;
+export default MainDrones;
