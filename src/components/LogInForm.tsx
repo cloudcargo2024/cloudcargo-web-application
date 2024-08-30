@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import users from "../localDB/users.json";
 import { useNavigate } from "react-router-dom";
 import "../styles/login.css";
+import user from "../models/userModel";
 
 export default function LogInForm() {
-  const [usersData, setUsersData] = React.useState(users);
+  const [usersData, setUsersData] = useState<user[]>(users);
   const navigate = useNavigate();
 
-  const [inputPassword, setInputPassword] = React.useState("");
-  const [inputEmail, setInputEmail] = React.useState("");
+  const [inputPassword, setInputPassword] = useState<string>("");
+  const [inputEmail, setInputEmail] = useState<string>("");
 
   let loggedIn = false;
 
@@ -18,7 +19,7 @@ export default function LogInForm() {
 
   function validateLogin() {
     usersData.map(({ id, email, password }) => {
-      if (email == inputEmail && password == inputPassword) {
+      if (email === inputEmail && password === inputPassword) {
         loggedIn = true;
         login();
       }
