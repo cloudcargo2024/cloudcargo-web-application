@@ -1,7 +1,7 @@
 import React from "react";
 import users from "../localDB/users.json";
 import { useNavigate } from "react-router-dom";
-import "./login.css";
+import "../styles/login.css";
 
 export default function LogInForm() {
   const [usersData, setUsersData] = React.useState(users);

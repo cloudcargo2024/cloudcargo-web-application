@@ -1,14 +1,14 @@
 import React from "react";
 import logo from "./logo.svg";
-import "./App.css";
+import "./styles/App.css";
 import {
   createBrowserRouter,
   Route,
   RouterProvider,
   createRoutesFromElements,
 } from "react-router-dom";
-import Main from "./routes/main/main";
-import LogIn from "./routes/login";
+import Main from "./views/main";
+import LogIn from "./components/login";
 
 function App() {
   const router = createBrowserRouter(

@@ -1,7 +1,7 @@
 // import Link from "next/link.js";
 import React from "react";
-import Mountains from "./mountains.js";
-import "./login.css";
+import Mountains from "./mountains";
+import "../styles/login.css";
 
 import LogInForm from "./LogInForm";
 
