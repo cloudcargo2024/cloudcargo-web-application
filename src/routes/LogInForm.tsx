@@ -17,7 +17,7 @@ export default function LogInForm() {
   }
 
   function validateLogin() {
-    usersData.map(function ({ id, email, password }) {
+    usersData.map(({ id, email, password }) => {
       if (email == inputEmail && password == inputPassword) {
         loggedIn = true;
         login();

@@ -1,26 +1,24 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import LogIn from "./routes/login";
+import {
+  createBrowserRouter,
+  Route,
+  RouterProvider,
+  createRoutesFromElements,
+} from "react-router-dom";
 import Main from "./routes/main/main";
+import LogIn from "./routes/login";
 
 function App() {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-
-      element: (
-        <div className="main bg">
-          <LogIn />
-        </div>
-      ),
-    },
-    {
-      path: "/main",
-      element: <Main />,
-    },
-  ]);
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <>
+        <Route path="/" element={<LogIn />} />
+        <Route path="/main" element={<Main />} />
+      </>
+    )
+  );
 
   return <RouterProvider router={router} />;
 }
