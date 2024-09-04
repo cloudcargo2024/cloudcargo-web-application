@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import users from "../localDB/users.json";
 import { useNavigate } from "react-router-dom";
 import "../styles/login.css";
-import user from "../models/userModel";
+import user from "../models/user";
 
 export default function LogInForm() {
   const [usersData, setUsersData] = useState<user[]>(users);
@@ -18,13 +18,13 @@ export default function LogInForm() {
   }
 
   function validateLogin() {
-    usersData.map(({ id, email, password }) => {
+    usersData.map(({ email, password }) => {
       if (email === inputEmail && password === inputPassword) {
         loggedIn = true;
         login();
       }
     });
-    if (loggedIn == false) alert("Incorrect email or password!");
+    if (loggedIn === false) alert("Incorrect email or password!");
   }
 
   return (
