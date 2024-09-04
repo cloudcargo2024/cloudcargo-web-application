@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import users from "../localDB/users.json";
 import { useNavigate } from "react-router-dom";
 import "../styles/login.css";
 import user from "../models/userModel";
+import isLoggedIncontext from "../context/context";
+
 
 export default function LogInForm() {
   const [usersData, setUsersData] = useState<user[]>(users);
@@ -11,23 +13,32 @@ export default function LogInForm() {
   const [inputPassword, setInputPassword] = useState<string>("");
   const [inputEmail, setInputEmail] = useState<string>("");
 
-  let loggedIn = false;
+  const [loggedIn, setLoggedIn] = useState(false);
+
+
+ 
 
   function login() {
     navigate("/main");
   }
 
-  function validateLogin() {
-    usersData.map(({ id, email, password }) => {
+function validateLogin(event: React.FormEvent) {
+  event.preventDefault(); 
+    let isValidUser = false;
+    usersData.forEach(({ id, email, password }) => {
       if (email === inputEmail && password === inputPassword) {
-        loggedIn = true;
+        isValidUser=true;
+        setLoggedIn(true);
+        
         login();
       }
     });
-    if (loggedIn == false) alert("Incorrect email or password!");
+    // if (isValidUser === false) alert("Incorrect email or password!");
+    isValidUser ? setLoggedIn(true) : setLoggedIn(false);
   }
 
   return (
+    <isLoggedIncontext.Provider value={loggedIn}>
     <form onSubmit={validateLogin}>
       <label className="form_label ">
         Email:{" "}
@@ -65,5 +76,6 @@ export default function LogInForm() {
         Log in
       </button>
     </form>
+    </isLoggedIncontext.Provider>
   );
 }
