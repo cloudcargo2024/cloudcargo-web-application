@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import users from "../localDB/users.json";
 import { useNavigate } from "react-router-dom";
 import "../styles/login.css";
-import user from "../models/user";
+import User from "../models/User";
 
 export default function LogInForm() {
-  const [usersData, setUsersData] = useState<user[]>(users);
+  const [usersData, setUsersData] = useState<User[]>(users);
   const navigate = useNavigate();
 
   const [inputPassword, setInputPassword] = useState<string>("");
