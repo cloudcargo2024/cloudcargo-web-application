@@ -4,9 +4,20 @@ ul {
     list-style: none;
 }
 
-li {
+li{
     border-style: none none none solid;
+    border-radius: 10px;
+}
 
+li:hover .onHover {
+    display: block;
+}
+
+.onHover {
+    background-color: grey;
+    padding: 20px;
+    border-radius: 10px;
+    display: none;
 }
 
 .red {

@@ -23,16 +23,6 @@ const drones: Drone[] = [
     }
 ];
 
-function showCoordinates(x: number, y: number, z: number) {
-    return (
-        <head>
-            <div>x: {x}</div>
-            <div>y: {y}</div>
-            <div>z: {z}</div>
-        </head>
-    );
-}
-
 function getClassName(status: string) {
     switch(status) {
         case "parked":
@@ -45,15 +35,16 @@ function getClassName(status: string) {
 }
 
 function MainDrones() {
-    const dronesList = drones.map((drone, index, size) => (
-        <li onMouseOver="showCoordinates(drone.x, drone.y, drone.z)" key={index} className={getClassName(drone.status)}>
+    const dronesList = drones.map((drone, index) => (
+        <li key={index} className={getClassName(drone.status)}>
             <div>Drone#{drone.id}-{drone.size}</div>
             <div>{drone.status}</div>
+            <div className="onHover">x: {drone.x}; y: {drone.y}; z: {drone.z}</div>
         </li>
     ));
 
     return (
-      <ul className='ol'>
+      <ul>
         {dronesList}
       </ul>
     );
