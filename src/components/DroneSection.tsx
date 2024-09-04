@@ -1,19 +1,31 @@
 import React from 'react';
 import './styles/droneList.css';
-import './models.tsx';
+import {Drone} from '../models/Drone.tsx';
 
 const drones: Drone[] = [
     {
         id: 0,
-        status: "parked"
+        status: "parked",
+        coordinates: {
+            lat: 1,
+            lng: 1.5
+        }
     },
     {
         id: 1,
-        status: "delivering"
+        status: "delivering",
+        coordinates: {
+            lat: 1,
+            lng: 1.5
+        }
     },
     {
         id: 2,
-        status: "returning"
+        status: "returning",
+        coordinates: {
+            lat: 1,
+            lng: 1.5
+        }
     }
 ];
 
@@ -28,18 +40,20 @@ function getClassName(status: string) {
     }
 }
 
-function Main() {
+function MainDrones() {
     const dronesList = drones.map((drone, index) => (
         <li key={index} className={getClassName(drone.status)}>
-            {drone.id} - {drone.status}
+            <div>Drone#{drone.id}</div>
+            <div>{drone.status}</div>
+            <div className="onHover">lng: {drone.coordinates.lat}; lng: {drone.coordinates.lng}</div>
         </li>
     ));
 
     return (
-      <ul className='ol'>
+      <ul>
         {dronesList}
       </ul>
     );
   }
 
-export default Main;
+export default MainDrones;

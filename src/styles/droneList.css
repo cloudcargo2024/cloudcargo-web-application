@@ -2,6 +2,24 @@ ul {
     border: 3px solid;
     position: absolute;
     right: 30px;
+    right: 200px;
+    list-style: none;
+}
+
+li{
+    border-style: none none none solid;
+    border-radius: 10px;
+}
+
+li:hover .onHover {
+    display: block;
+}
+
+.onHover {
+    background-color: grey;
+    padding: 20px;
+    border-radius: 10px;
+    display: none;
 }
 
 .red {
