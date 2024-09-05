@@ -5,9 +5,28 @@ const app = express();
 
 const PORT = 5000;
 
-// Replace with your drone's IP and port
-const DRONE_IP = '192.168.4.153';  // Example IP
-const DRONE_PORT = 8090;          // Example port
+//Drone packets
+
+const DefaultPacket = [0x66, 0x80, 0x80, 0x80, 0x80, 0x00, 0x00, 0x99];
+const TakeOffPacket = [0x66, 0x80, 0x80, 0x80, 0x80, 0x01, 0x01, 0x99];
+const LandPacket = [0x66, 0x80, 0x80, 0x80, 0x80, 0x02, 0x02, 0x99];
+const StopPacket = [0x66, 0x80, 0x80, 0x80, 0x80, 0x04, 0x04, 0x99];
+
+const AppStartPacket = [0xaa, 0x80, 0x80, 0x00, 0x80, 0x00, 0x80, 0x55];
+
+///TO BE TESTED !!!
+const UpPacket = [0x66, 0x80, 0x80, 0xff, 0x80, 0x00, 0x80, 0x99];
+const DownPacket = [0x66, 0x80, 0x80, 0x00, 0x80, 0x00, 0x80, 0x99];
+const RotateLeftPacket = [0x66, 0x80, 0x80, 0x80, 0x00, 0x00, 0x80, 0x99];
+const RotateRightPacket = [0x66, 0x80, 0x80, 0x80, 0xff, 0x00, 0x80, 0x99];
+const ForwardPacket = [0x66, 0x80, 0xff, 0x80, 0x80, 0x00, 0x80, 0x99];
+const BackPacket = [0x66, 0x80, 0x00, 0x80, 0x80, 0x00, 0x80, 0x99];
+const LeftPacket = [0x66, 0x00, 0x80, 0x80, 0x80, 0x00, 0x80, 0x99];
+const RightPacket = [0x66, 0xff, 0x80, 0x80, 0x80, 0x00, 0x80, 0x99];
+
+
+const DRONE_IP = '192.168.4.153';  // Drone IP
+const DRONE_PORT = 8090;          // Drone port
 
 const droneSocket = dgram.createSocket('udp4');
 
@@ -16,21 +35,11 @@ app.use(express.json());
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, 'build')));
 
-// Function to create the specific takeoff packet
-function createDCPPacketTakeOff() {
-    const buffer = Buffer.from([0x66, 0x80, 0x80, 0x80, 0x80, 0x01, 0x01, 0x99]);
+function createDCPPacket(packet){
+    const buffer = Buffer.from(packet);
     return buffer;
 }
 
-function createDCPPacketLanding() {
-    const buffer = Buffer.from([0x66, 0x80, 0x80, 0x80, 0x80, 0x02, 0x02, 0x99]);
-    return buffer;
-}
-
-function createDCPPacketStop() {
-    const buffer = Buffer.from([0x66, 0x80, 0x80, 0x80, 0x80, 0x04, 0x04, 0x99]);
-    return buffer;
-}
 
 // Function to send the packet to the drone
 function sendCommand(buffer) {
@@ -47,41 +56,69 @@ function sendCommand(buffer) {
     });
 }
 
-// API Endpoints under /api/drone-flight
-app.post('/api/drone-flight/takeoff', async (req, res) => {
+const handleDroneCommand =  async (res, packetType, successMessage, errorMessage) => {
     try {
-        const packet = createDCPPacketTakeOff();  // Create the packet
+        const packet = createDCPPacket(packetType);  // Create the packet
         await sendCommand(packet);  // Send the packet to the drone
-        res.status(200).json({ status: 'Drone is taking off' });
+        res.status(200).json({ status: successMessage });
     } catch (error) {
-        res.status(500).json({ status: 'Failed to send takeoff command', error: error.toString() });
+        res.status(500).json({ status: errorMessage, error: error.toString() });
     }
+}
+
+
+// API Endpoints under /api/drone-flight
+app.post('/api/drone-flight/default', async (req, res) => {
+    await handleDroneCommand(res, DefaultPacket, 'Drone is waiting', 'Failed to send default packet');
+ });
+
+ app.post('/api/drone-flight/appstart', async (req, res) => {
+    await handleDroneCommand(res, AppStartPacket, 'App start packet sent', 'Failed to send app start packet');
+ });
+
+app.post('/api/drone-flight/takeoff', async (req, res) => {
+   await handleDroneCommand(res, TakeOffPacket, 'Drone is taking off', 'Failed to send takeoff packet');
 });
 
 app.post('/api/drone-flight/land', async (req, res) => {
-    try {
-        const packet = createDCPPacketLanding();  // Create the packet
-        await sendCommand(packet);  // Send the packet to the drone
-        res.status(200).json({ status: 'Drone is landing' });
-    } catch (error) {
-        res.status(500).json({ status: 'Failed to send land command', error: error.toString() });
-    }
+    await handleDroneCommand(res, LandPacket, 'Drone is landing', 'Failed to send land command');
 });
 
 app.post('/api/drone-flight/stop', async (req, res) => {
-    try {
-        const packet = createDCPPacketStop();  // Create the packet
-        await sendCommand(packet);  // Send the packet to the drone
-        res.status(200).json({ status: 'Emergency stop' });
-    } catch (error) {
-        res.status(500).json({ status: 'Failed to send stop command', error: error.toString() });
-    }
+    await handleDroneCommand(res, StopPacket, 'Emergency stop', 'Failed to send stop command');
 });
 
-// Serve the React app for all other requests
-// app.get('*', (req, res) => {
-//     res.sendFile(path.join(__dirname, 'build', 'index.html'));
-// });
+app.post('/api/drone-flight/up', async (req, res) => {
+    await handleDroneCommand(res, UpPacket, 'Going up', 'Failed to send up command');
+});
+
+app.post('/api/drone-flight/down', async (req, res) => {
+    await handleDroneCommand(res, DownPacket, 'Going down', 'Failed to send down command');
+});
+
+app.post('/api/drone-flight/rotateright', async (req, res) => {
+    await handleDroneCommand(res, RotateRightPacket, 'Rotating right', 'Failed to send rotate right command');
+});
+
+app.post('/api/drone-flight/rotateleft', async (req, res) => {
+    await handleDroneCommand(res, RotateLeftPacket, 'Rotating left', 'Failed to send rotate left command');
+});
+
+app.post('/api/drone-flight/forward', async (req, res) => {
+    await handleDroneCommand(res, ForwardPacket, 'Going forward', 'Failed to send forward command');
+});
+
+app.post('/api/drone-flight/back', async (req, res) => {
+    await handleDroneCommand(res, BackPacket, 'Going back', 'Failed to send back command');
+});
+
+app.post('/api/drone-flight/left', async (req, res) => {
+    await handleDroneCommand(res, LeftPacket, 'Going left', 'Failed to send left command');
+});
+
+app.post('/api/drone-flight/right', async (req, res) => {
+    await handleDroneCommand(res, RightPacket, 'Going right', 'Failed to send right command');
+});
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
