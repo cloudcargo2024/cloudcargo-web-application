@@ -1,6 +1,6 @@
 import React from 'react';
-import './styles/droneList.css';
-import './models.tsx';
+import '../styles/droneList.css';
+import '../models.tsx';
 
 const drones: Drone[] = [
     {

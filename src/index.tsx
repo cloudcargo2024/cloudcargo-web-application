@@ -3,15 +3,15 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Main from "./DroneSection";
-import MainDrones from './DroneSection';
+import Main from "./components/DroneSection";
+import MainDrones from './components/DroneSection';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <MainDrones />
+    <App />
   </React.StrictMode>
 );
 
