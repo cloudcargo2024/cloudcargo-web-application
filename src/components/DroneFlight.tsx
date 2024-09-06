@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react";
 
 export default function DroneFlight() {
-  const [currentKey, setCurrentKey] = useState<string>("");
+  // const [currentKey, setCurrentKey] = useState<string>("");
 
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      console.log(event.code);
-      setCurrentKey(event.code);
-    };
+  // useEffect(() => {
+  //   const handleKeyDown = (event: KeyboardEvent) => {
+  //     console.log(event.code);
+  //     setCurrentKey(event.code);
+  //   };
 
-    document.addEventListener("keydown", handleKeyDown);
+  //   document.addEventListener("keydown", handleKeyDown);
 
-    // Cleanup function to remove the event listener
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, []);
+  //   // Cleanup function to remove the event listener
+  //   return () => {
+  //     document.removeEventListener("keydown", handleKeyDown);
+  //   };
+  // }, []);
 
   async function sendCommand(command: string) {
     fetch(`/api/drone-flight/${command}`, {
@@ -40,38 +40,38 @@ export default function DroneFlight() {
       isProcessing = false;
     }
   }
-  switch (currentKey) {
-    case "ArrowUp":
-      processEvent("forward");
-      break;
-    case "ArrowDown":
-      processEvent("back");
-      break;
-    case "ArrowLeft":
-      processEvent("left");
-      break;
-    case "ArrowRight":
-      processEvent("right");
-      break;
-    case "Space":
-      processEvent("stop");
-      break;
-    case "KeyW":
-      processEvent("up");
-      break;
-    case "KeyS":
-      processEvent("down");
-      break;
-    case "KeyA":
-      processEvent("rotateleft");
-      break;
-    case "KeyD":
-      processEvent("rotateright");
-      break;
-    default:
-      processEvent("default");
-      break;
-  }
+  // switch (currentKey) {
+  //   case "ArrowUp":
+  //     processEvent("forward");
+  //     break;
+  //   case "ArrowDown":
+  //     processEvent("back");
+  //     break;
+  //   case "ArrowLeft":
+  //     processEvent("left");
+  //     break;
+  //   case "ArrowRight":
+  //     processEvent("right");
+  //     break;
+  //   case "Space":
+  //     processEvent("stop");
+  //     break;
+  //   case "KeyW":
+  //     processEvent("up");
+  //     break;
+  //   case "KeyS":
+  //     processEvent("down");
+  //     break;
+  //   case "KeyA":
+  //     processEvent("rotateleft");
+  //     break;
+  //   case "KeyD":
+  //     processEvent("rotateright");
+  //     break;
+  //   default:
+  //     processEvent("default");
+  //     break;
+  // }
 
   return (
     <>
