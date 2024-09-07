@@ -15,14 +15,14 @@
   margin-bottom: 20px;
 }
 .logo {
-  height: 60px; 
-  margin-right: 10px; 
+  height: 100px; 
+  margin-right: 0px; 
 }
 .map-header {
   margin: 0; 
   font-family: 'Courier New', Courier, monospace;
   font-weight: bold; 
-  font-size: 35px; 
+  font-size: 32.5px; 
 }
 
 .map .gmnoprint,

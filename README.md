@@ -1,6 +1,6 @@
 <h1 align="center" style="font-size: 48px;">The Cloud Cargo App</h1>
 <p align="center">
-  <img src="assets\LogoCC.png" width="250"/>
+  <img src="src/assets/LogoCC.png" width="250"/>
 </p>
 
 ### **Hey there! You have just stumbled upon a pretty ambitious project, so bear with me for a second :))**
