@@ -5,40 +5,42 @@ import "../styles/login.css";
 import user from "../models/userModel";
 import isLoggedIncontext from "../context/context";
 
-
 export default function LogInForm() {
   const [usersData, setUsersData] = useState<user[]>(users);
   const navigate = useNavigate();
 
+  const context = useContext(isLoggedIncontext);
+
+  if (!context) {
+    throw new Error("useContext must be used within an IsLoggedInProvider");
+  }
+
+  console.log(context);
+
   const [inputPassword, setInputPassword] = useState<string>("");
   const [inputEmail, setInputEmail] = useState<string>("");
 
-  const [loggedIn, setLoggedIn] = useState(false);
-
-
- 
+  const { loggedIn, setLoggedIn } = context;
 
   function login() {
     navigate("/main");
   }
 
-function validateLogin(event: React.FormEvent) {
-  event.preventDefault(); 
+  function validateLogin(event: React.FormEvent) {
+    event.preventDefault();
     let isValidUser = false;
     usersData.forEach(({ id, email, password }) => {
       if (email === inputEmail && password === inputPassword) {
-        isValidUser=true;
+        isValidUser = true;
         setLoggedIn(true);
-        
         login();
       }
     });
-    // if (isValidUser === false) alert("Incorrect email or password!");
-    isValidUser ? setLoggedIn(true) : setLoggedIn(false);
+
+    if (isValidUser === false) alert("Incorrect email or password!");
   }
 
   return (
-    <isLoggedIncontext.Provider value={loggedIn}>
     <form onSubmit={validateLogin}>
       <label className="form_label ">
         Email:{" "}
@@ -71,11 +73,9 @@ function validateLogin(event: React.FormEvent) {
           emergency services, for more details and authorizations.
         </p>
       </div>
-
       <button type="submit" className="submit_button">
         Log in
       </button>
     </form>
-    </isLoggedIncontext.Provider>
   );
 }
