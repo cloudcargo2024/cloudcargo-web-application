@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { APIProvider, Map, Marker } from '@vis.gl/react-google-maps';
 import '../models/Drone'
 import '../styles/Map.css'
@@ -8,48 +8,72 @@ import axios from 'axios';
 
 function App() {
   const [DronesList, setDronesList] = useState<Drone[]>([]);
+  const [nonUpdateError, setNonUpdateError] = useState<string | null>(null);
+  const [updateError, setUpdateError] = useState<string | null>(null);
+  const [retryCount, setRetryCount] = useState<number>(5);
   const API_BASE_URL = "https://66d998da4ad2f6b8ed5550ff.mockapi.io";
 
-  const fetchDrones = async () => {
-    try {
-      const response = await axios.get(`${API_BASE_URL}/Drone`);
-      setDronesList(response.data);
-    } catch (error) {
-      console.error("Error fetching drones data:", error);
-    }
-  };
-
-  const updateDroneById = useCallback(
-    async (drone: Drone) => {
-      try {
-        console.log(`Updating drone with ID ${drone.id}:`, drone); 
-        await axios.put(`${API_BASE_URL}/Drone/${drone.id}`, drone);
-      } catch (error) {
-        console.error("Error updating drones data:", error);
-      }
-  }, [API_BASE_URL]);
-
   useEffect(() => {
+    const fetchDrones = async () => {
+      try {
+        const response = await axios.get(`${API_BASE_URL}/Drone`);
+        setDronesList(response.data);
+      } catch (err) {
+        setUpdateError(null);
+        setNonUpdateError("Failed to fetch drone data. Please try again later.");
+      }
+    };
+
     fetchDrones();
   }, []);
 
   useEffect(() => {
-    const updateCoordinates = () => {
-      const newDronesList = DronesList.map((drone) => ({
-        ...drone,
-        coordinates: {
-          lat: drone.coordinates.lat + 0.001, 
+    const updateCoordinates = async () => {
+      if (retryCount === 0) return;
+
+      for (const drone of DronesList) {
+        const newCoordinates = {
+          lat: drone.coordinates.lat + 0.001,
           lng: drone.coordinates.lng + 0.001,
-        },
-      }));
-      
-      setDronesList(newDronesList);
-      newDronesList.forEach((drone) => updateDroneById(drone));
+        };
+
+        try {
+          await axios.put(`${API_BASE_URL}/Drone/${drone.id}`, {
+            ...drone,
+            coordinates: newCoordinates,
+          });
+
+        } catch (error) {
+          setUpdateError("Failed to update drones data. Retrying...");
+          setRetryCount((prevCount) => prevCount - 1);
+          break;
+        }
+
+        setDronesList((prevDronesList) =>
+          prevDronesList.map((d) =>
+            d.id === drone.id ? { ...d, coordinates: newCoordinates } : d
+          )
+        );
+      }
     };
 
-    const interval = setInterval(updateCoordinates, 1000);
+    const interval = setInterval(updateCoordinates, 500);
+
+    if (retryCount === 0) {
+      clearInterval(interval);
+      setUpdateError(null);
+      setNonUpdateError("Failed to update drones data. Please try again later.")
+    }
+
     return () => clearInterval(interval);
-  }, [DronesList, updateDroneById]);
+  }, [DronesList, retryCount]);
+
+  useEffect(() => {
+    if (updateError) {
+      const timeoutId = setTimeout(() => setUpdateError(null), 5000);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [updateError]);
 
   const zoom = 7.3;
   return (
@@ -74,6 +98,8 @@ function App() {
           </Map>
         </div>
       </APIProvider>
+      {nonUpdateError && <div className="error-message">{nonUpdateError}</div>}
+      {updateError && <div className="error-message">{updateError}</div>}
     </div>
   );
 }
