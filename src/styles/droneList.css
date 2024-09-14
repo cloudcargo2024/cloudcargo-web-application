@@ -1,0 +1,67 @@
+ul {
+<<<<<<< HEAD
+    border: 3px solid;
+    position: absolute;
+    right: 30px;
+=======
+    position: absolute;
+>>>>>>> 7e653272878dfe4be7db6eb20cfb0fb153a1ccfc
+    right: 200px;
+    list-style: none;
+}
+
+li{
+    border-style: none none none solid;
+    border-radius: 10px;
+}
+
+li:hover .onHover {
+    display: block;
+}
+
+.onHover {
+    background-color: grey;
+    padding: 20px;
+    border-radius: 10px;
+    display: none;
+}
+
+.red {
+<<<<<<< HEAD
+    list-style-type: none;
+    color: red;
+}
+
+.green {
+    list-style-type: none;
+    color: green;
+}
+
+.orange {
+    list-style-type: none;
+    color: orange;
+}
+
+.dark {
+    list-style-type: none;
+    color: darkred;
+=======
+    border-color: red;
+    background-color: rgba(255, 0, 0, 0.226);
+}
+
+.green {
+    border-color: green;
+    background-color: rgba(0, 128, 0, 0.226);
+}
+
+.orange {
+    border-color: orange;
+    background-color: rgba(255, 166, 0, 0.226);
+}
+
+.dark {
+    border-color: darkslategrey;
+    background-color: rgba(139, 0, 0, 0.226);
+>>>>>>> 7e653272878dfe4be7db6eb20cfb0fb153a1ccfc
+}
