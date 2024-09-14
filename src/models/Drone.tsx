@@ -1,3 +1,5 @@
+import { markers } from '../assets/markers/allMarkers';
+
 export type Drone = {
     id: number;
     status: droneStatus;
@@ -11,4 +13,9 @@ type droneCoordinates = {
     lng: number;
   };
 
-  export{}
+export const droneStatusIcons: Record<droneStatus, string> = {
+    delivering: markers.red,
+    returning: markers.green,
+    parked: markers.orange,
+    undefined: markers.black,
+  };

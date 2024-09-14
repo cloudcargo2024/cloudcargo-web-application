@@ -3,7 +3,7 @@ import { APIProvider, Map, Marker } from '@vis.gl/react-google-maps';
 import '../models/Drone'
 import '../styles/Map.css'
 import logo from '../assets/LogoCC.png';
-import { Drone } from '../models/Drone';
+import { Drone, droneStatusIcons } from '../models/Drone';
 import axios from 'axios';
 
 function App() {
@@ -30,8 +30,12 @@ function App() {
   useEffect(() => {
     const updateCoordinates = async () => {
       if (retryCount === 0) return;
-
+      
       for (const drone of DronesList) {
+        if (drone.status === "parked") {
+          continue;
+        }
+
         const newCoordinates = {
           lat: drone.coordinates.lat + 0.001,
           lng: drone.coordinates.lng + 0.001,
@@ -46,7 +50,7 @@ function App() {
         } catch (error) {
           setUpdateError("Failed to update drones data. Retrying...");
           setRetryCount((prevCount) => prevCount - 1);
-          break;
+          continue;
         }
 
         setDronesList((prevDronesList) =>
@@ -93,7 +97,9 @@ function App() {
             disableDefaultUI={true}
           >
             {DronesList.map((drone) => (
-              <Marker key={drone.id} position={drone.coordinates} />
+              <Marker key={drone.id}
+                position={drone.coordinates}
+                icon={droneStatusIcons[drone.status]} />
             ))}
           </Map>
         </div>
