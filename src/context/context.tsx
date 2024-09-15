@@ -1,4 +1,10 @@
-import { createContext } from 'react';
-const isLoggedIncontext = createContext<boolean>(false);
-export default isLoggedIncontext;
+import { createContext } from "react";
+const IsLoggedInContext = createContext<
+  | {
+      loggedIn: boolean;
+      setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+    }
+  | undefined
+>(undefined);
+export default IsLoggedInContext;
 
