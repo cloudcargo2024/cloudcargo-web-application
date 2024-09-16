@@ -1,13 +1,7 @@
 ul {
-<<<<<<< HEAD
     border: 3px solid;
     position: absolute;
     right: 30px;
-=======
-    position: absolute;
->>>>>>> 7e653272878dfe4be7db6eb20cfb0fb153a1ccfc
-    right: 200px;
-    list-style: none;
 }
 
 li{
