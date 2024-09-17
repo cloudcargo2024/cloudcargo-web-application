@@ -15,8 +15,6 @@ export default function LogInForm() {
     throw new Error("useContext must be used within an IsLoggedInProvider");
   }
 
-  console.log(context);
-
   const [inputPassword, setInputPassword] = useState<string>("");
   const [inputEmail, setInputEmail] = useState<string>("");
 
