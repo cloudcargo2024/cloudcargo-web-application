@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { APIProvider, Map, Marker } from '@vis.gl/react-google-maps';
-import '../models/Drone'
+import { Drone } from '../models/Drone';
 import '../styles/Map.css'
 import logo from '../assets/LogoCC.png';
-import { Drone, droneStatusIcons } from '../models/Drone';
+import { droneStatusIcons } from '../utils/markerConstants';
 import axios from 'axios';
 
 function App() {
