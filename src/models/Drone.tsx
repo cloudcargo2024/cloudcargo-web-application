@@ -4,11 +4,9 @@ export type Drone = {
     coordinates: droneCoordinates; 
 };
 
-type droneStatus = "parked" | "delivering" | "returning" | "undefined";
+export type droneStatus = "parked" | "delivering" | "returning" | "undefined";
 
 type droneCoordinates = {
     lat: number;
     lng: number;
   };
-
-  export{}
