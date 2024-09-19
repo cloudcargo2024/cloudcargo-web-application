@@ -1,0 +1,32 @@
+.map-container {
+    display: flex;  
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    height: 95vh; 
+    width: 95vw;
+    margin-left: 20px;
+    overflow: hidden;
+    position: relative;
+}
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.logo {
+  height: 100px; 
+  margin-right: 0px; 
+}
+.map-header {
+  margin: 0; 
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold; 
+  font-size: 32.5px; 
+}
+
+.map .gmnoprint,
+.map .gm-style-cc 
+{
+  display: none;
+}
