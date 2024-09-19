@@ -4,6 +4,7 @@ import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LogIn from "./routes/login";
 import Main from "./routes/main/main";
+import InformationForAdmins from "./routes/InformationForAdmins";
 
 function App() {
   const router = createBrowserRouter([
@@ -20,9 +21,14 @@ function App() {
       path: "/main",
       element: <Main />,
     },
+    {
+      path: "/InfoForAdmin",
+      element: <InformationForAdmins />,
+    },
   ]);
 
   return <RouterProvider router={router} />;
 }
+
 
 export default App;

@@ -2,6 +2,8 @@ import React from "react";
 import users from "../localDB/users.json";
 import { useNavigate } from "react-router-dom";
 import "./login.css";
+import { Link } from 'react-router-dom';
+
 
 export default function LogInForm() {
   const [usersData, setUsersData] = React.useState(users);
@@ -14,6 +16,10 @@ export default function LogInForm() {
 
   function login() {
     navigate("/main");
+  }
+  
+  function switchToInfo() {
+  	navigate("/InfoForAdmin");
   }
 
   function validateLogin() {
@@ -51,8 +57,8 @@ export default function LogInForm() {
           onChange={(e) => setInputPassword(e.target.value)}
         />
       </label>
-      <div className="info ">
-        How do I get an admin account?
+      <div className="info "> 
+        <button onClick={() => switchToInfo()}>How do I get an admin account? </button>
         <p className="tooltip_text">
           If you are a rescue team, trying to setup a drone system in your area,
           you should contact an official from CloudCargo, and reach to local
