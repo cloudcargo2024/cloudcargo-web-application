@@ -1,5 +1,5 @@
 import React from 'react';
-import './styles/droneList.css';
+import '../styles/droneList.css';
 import {Drone} from '../models/Drone.tsx';
 
 const drones: Drone[] = [
