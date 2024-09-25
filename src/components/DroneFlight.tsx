@@ -76,6 +76,7 @@ export default function DroneFlight() {
   return (
     <>
       <h1>Drone commands</h1>
+      {/* <button onClick={() => processEvent("flight")}>Flight</button> */}
       <button onClick={() => processEvent("appstart")}>Start app</button>
       <button onClick={() => processEvent("default")}>Default</button>
       <button onClick={() => processEvent("takeoff")}>Take off</button>

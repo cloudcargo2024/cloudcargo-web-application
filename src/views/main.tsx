@@ -5,7 +5,7 @@ export default function Success() {
   return (
     <>
       <MapAP />
-      <DroneFlight />
+      {/* <DroneFlight /> */}
     </>
   );
 }
