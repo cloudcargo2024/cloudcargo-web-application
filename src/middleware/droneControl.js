@@ -67,20 +67,6 @@ const handleDroneCommand =  async (res, packetType, successMessage, errorMessage
 }
 
 
-// API Endpoints under /api/drone-flight
-// app.post('/api/drone-flight/flight', async (req, res) => {
-//     let sentCommands = false;
-//     while(!sentCommands) {
-//         var count = 0;
-//         while(count <= 100)
-//         {
-//             setTimeout(async () => {await handleDroneCommand(res, DefaultPacket, 'Drone is waiting', 'Failed to send default packet');}, 300);
-//             count++;
-//         }
-//         sentCommands = true;
-//     }
-// });
-
 
 app.post('/api/drone-flight/default', async (req, res) => {
     await handleDroneCommand(res, DefaultPacket, 'Drone is waiting', 'Failed to send default packet');

@@ -1,22 +1,6 @@
 import { useEffect, useState } from "react";
 
 export default function DroneFlight() {
-  // const [currentKey, setCurrentKey] = useState<string>("");
-
-  // useEffect(() => {
-  //   const handleKeyDown = (event: KeyboardEvent) => {
-  //     console.log(event.code);
-  //     setCurrentKey(event.code);
-  //   };
-
-  //   document.addEventListener("keydown", handleKeyDown);
-
-  //   // Cleanup function to remove the event listener
-  //   return () => {
-  //     document.removeEventListener("keydown", handleKeyDown);
-  //   };
-  // }, []);
-
   async function sendCommand(command: string) {
     fetch(`/api/drone-flight/${command}`, {
       method: "POST",
@@ -40,43 +24,30 @@ export default function DroneFlight() {
       isProcessing = false;
     }
   }
-  // switch (currentKey) {
-  //   case "ArrowUp":
-  //     processEvent("forward");
-  //     break;
-  //   case "ArrowDown":
-  //     processEvent("back");
-  //     break;
-  //   case "ArrowLeft":
-  //     processEvent("left");
-  //     break;
-  //   case "ArrowRight":
-  //     processEvent("right");
-  //     break;
-  //   case "Space":
-  //     processEvent("stop");
-  //     break;
-  //   case "KeyW":
-  //     processEvent("up");
-  //     break;
-  //   case "KeyS":
-  //     processEvent("down");
-  //     break;
-  //   case "KeyA":
-  //     processEvent("rotateleft");
-  //     break;
-  //   case "KeyD":
-  //     processEvent("rotateright");
-  //     break;
-  //   default:
-  //     processEvent("default");
-  //     break;
-  // }
+
+  const delay = (ms: number) =>
+    new Promise((resolve) => setTimeout(resolve, ms));
+
+  async function sendMultipleCommands() {
+    const commands = [
+      "takeoff",
+      "up",
+      "default",
+      "rotateleft",
+      "rotateright",
+      "land",
+    ];
+
+    for (const command of commands) {
+      await processEvent(command); // Send the command
+      await delay(3000); // Wait for 3 seconds before sending the next command
+    }
+  }
 
   return (
     <>
       <h1>Drone commands</h1>
-      {/* <button onClick={() => processEvent("flight")}>Flight</button> */}
+      <button onClick={() => sendMultipleCommands()}>Flight</button>
       <button onClick={() => processEvent("appstart")}>Start app</button>
       <button onClick={() => processEvent("default")}>Default</button>
       <button onClick={() => processEvent("takeoff")}>Take off</button>
