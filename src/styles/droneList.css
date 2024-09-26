@@ -1,0 +1,41 @@
+ul {
+    position: absolute;
+    right: 100px;
+    top: 50px;
+}
+
+li{
+    border-style: none none none solid;
+    border-radius: 10px;
+}
+
+li:hover .onHover {
+    display: block;
+}
+
+.onHover {
+    background-color: grey;
+    padding: 20px;
+    border-radius: 10px;
+    display: none;
+}
+
+.red {
+    border-color: red;
+    background-color: rgba(255, 0, 0, 0.226);
+}
+
+.green {
+    border-color: green;
+    background-color: rgba(0, 128, 0, 0.226);
+}
+
+.orange {
+    border-color: orange;
+    background-color: rgba(255, 166, 0, 0.226);
+}
+
+.dark {
+    border-color: darkslategrey;
+    background-color: rgba(139, 0, 0, 0.226);
+}
