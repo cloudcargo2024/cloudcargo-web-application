@@ -3,11 +3,11 @@ import users from "../localDB/users.json";
 import { useNavigate } from "react-router-dom";
 import "../styles/login.css";
 
-import user from "../models/userModel";
+import user from "../models/User";
 import isLoggedIncontext from "../context/context";
 
 export default function LogInForm() {
-  const [usersData, setUsersData] = useState<User[]>(users);
+  const [usersData, setUsersData] = useState<user[]>(users);
   const navigate = useNavigate();
 
   const context = useContext(isLoggedIncontext);
