@@ -1,5 +1,7 @@
 import React from "react";
+
 import "./styles/App.css";
+import isLoggedIncontext from "./context/context";
 import {
   createBrowserRouter,
   Route,
@@ -21,5 +23,4 @@ function App() {
 
   return <RouterProvider router={router} />;
 }
-
 export default App;

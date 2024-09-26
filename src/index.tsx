@@ -1,16 +1,33 @@
-import React from "react";
+import React, { ReactNode, useState } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import reportWebVitals from "./reportWebVitals";
-import Main from "./components/DroneSection";
 import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import isLoggedIncontext from "./context/context";
+
+interface ProviderProps {
+  children: ReactNode;
+}
+
+const IsLoggedInProvider = ({ children }: ProviderProps) => {
+  const [loggedIn, setLoggedIn] = useState<boolean>(false);
+
+  return (
+    <isLoggedIncontext.Provider value={{ loggedIn, setLoggedIn }}>
+      {children}
+    </isLoggedIncontext.Provider>
+  );
+};
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
+
 root.render(
   <React.StrictMode>
-    <App />
+    <IsLoggedInProvider>
+      <App />
+    </IsLoggedInProvider>
   </React.StrictMode>
 );
 

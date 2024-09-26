@@ -1,30 +1,42 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import users from "../localDB/users.json";
 import { useNavigate } from "react-router-dom";
 import "../styles/login.css";
-import User from "../models/User";
+
+import user from "../models/userModel";
+import isLoggedIncontext from "../context/context";
 
 export default function LogInForm() {
   const [usersData, setUsersData] = useState<User[]>(users);
   const navigate = useNavigate();
 
+  const context = useContext(isLoggedIncontext);
+
+  if (!context) {
+    throw new Error("useContext must be used within an IsLoggedInProvider");
+  }
+
   const [inputPassword, setInputPassword] = useState<string>("");
   const [inputEmail, setInputEmail] = useState<string>("");
 
-  let loggedIn = false;
+  const { loggedIn, setLoggedIn } = context;
 
   function login() {
     navigate("/main");
   }
 
-  function validateLogin() {
-    usersData.map(({ email, password }) => {
+  function validateLogin(event: React.FormEvent) {
+    event.preventDefault();
+    let isValidUser = false;
+    usersData.forEach(({ id, email, password }) => {
       if (email === inputEmail && password === inputPassword) {
-        loggedIn = true;
+        isValidUser = true;
+        setLoggedIn(true);
         login();
       }
     });
-    if (loggedIn === false) alert("Incorrect email or password!");
+
+    if (isValidUser === false) alert("Incorrect email or password!");
   }
 
   return (
@@ -60,7 +72,6 @@ export default function LogInForm() {
           emergency services, for more details and authorizations.
         </p>
       </div>
-
       <button type="submit" className="submit_button">
         Log in
       </button>
