@@ -16,6 +16,7 @@
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.1",
     "react-scripts": "5.0.1",
+    "tailwindcss": "^3.4.10",
     "typescript": "^5.5.4",
     "web-vitals": "^2.1.4"
   },
@@ -42,5 +43,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "<h1 align=\"center\" style=\"font-size: 48px;\">The Cloud Cargo App</h1>\r <p align=\"center\">\r   <img src=\"assets\\LogoCC.png\" width=\"250\"/>\r </p>",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
