@@ -30,17 +30,18 @@ export default function DroneFlight() {
 
   async function sendMultipleCommands() {
     const commands = [
-      "takeoff",
       "up",
-      "default",
+      "takeoff",
+      "rotateleft",
       "rotateleft",
       "rotateright",
-      "land",
+      "rotateright",
+      "stop",
     ];
 
     for (const command of commands) {
       await processEvent(command); // Send the command
-      await delay(3000); // Wait for 3 seconds before sending the next command
+      await delay(1000); // Wait for 3 seconds before sending the next command
     }
   }
 
