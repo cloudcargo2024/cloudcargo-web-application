@@ -49,7 +49,7 @@ export default function DroneFlight() {
     <>
       <h1>Drone commands</h1>
       <button onClick={() => sendMultipleCommands()}>Flight</button>
-      <button onClick={() => processEvent("appstart")}>Start app</button>
+      {/* <button onClick={() => processEvent("appstart")}>Start app</button>
       <button onClick={() => processEvent("default")}>Default</button>
       <button onClick={() => processEvent("takeoff")}>Take off</button>
       <button onClick={() => processEvent("stop")}>Stop</button>
@@ -61,7 +61,7 @@ export default function DroneFlight() {
       <button onClick={() => processEvent("forward")}>Forward</button>
       <button onClick={() => processEvent("back")}>Back</button>
       <button onClick={() => processEvent("left")}>Left</button>
-      <button onClick={() => processEvent("right")}>Right</button>
+      <button onClick={() => processEvent("right")}>Right</button> */}
     </>
   );
 }
