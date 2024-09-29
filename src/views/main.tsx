@@ -3,7 +3,9 @@ import MapAP from "../components/MapAP";
 import isLoggedInContext from "../context/context";
 import "../context/context.css";
 import Mountains from "../components/mountains";
+import DroneFlight from "../components/DroneFlight";
 import MainDrones from "../components/DroneSection";
+import "../styles/main.css";
 
 export default function Success() {
   const context = useContext(isLoggedInContext);
@@ -17,10 +19,13 @@ export default function Success() {
   return (
     <>
       {loggedIn ? (
-        <>
+        <div className="main-components">
           <MapAP />
           <MainDrones />
-        </>
+          <div className="drone-buttons">
+            <DroneFlight />
+          </div>
+        </div>
       ) : (
         <div className="main bg">
           <div className="login_container">

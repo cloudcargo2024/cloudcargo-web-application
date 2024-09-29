@@ -1,0 +1,8 @@
+.main-components{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* .drone-buttons {
+    align-self: flex-end;
+} */

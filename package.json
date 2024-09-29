@@ -24,7 +24,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+     "server": "node src/middleware/droneControl.js",
+    "dev": "concurrently \"npm:start\" \"npm run server\""
   },
   "eslintConfig": {
     "extends": [
@@ -44,6 +46,10 @@
       "last 1 safari version"
     ]
   },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "proxy": "http://localhost:5000",
   "description": "<h1 align=\"center\" style=\"font-size: 48px;\">The Cloud Cargo App</h1>\r <p align=\"center\">\r   <img src=\"assets\\LogoCC.png\" width=\"250\"/>\r </p>",
   "main": "index.js",
   "keywords": [],
