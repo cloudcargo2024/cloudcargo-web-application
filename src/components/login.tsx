@@ -8,7 +8,7 @@ export default function LogIn() {
   return (
     <div className="main bg">
       <div className="login_container">
-        <p className="logo_text">CloudCargo</p>
+      <p className="logo_text" style={{ margin: "40px 0" }}>CloudCargo</p>
         <LogInForm />
         <Mountains />
       </div>

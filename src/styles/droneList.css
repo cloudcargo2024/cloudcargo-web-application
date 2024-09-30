@@ -1,41 +1,78 @@
-ul {
+body {
+    margin: 0; /* Remove default margin */
+    height: 100vh; /* Full viewport height */
+    display: flex; /* Enable flexbox for body */
+    align-items: center; /* Center items vertically */
+    justify-content: flex-end; /* Align to the right */
+}
+
+ull {
     position: absolute;
-    right: 100px;
-    top: 50px;
+    right: 300px; /* Default right margin */
+    top: 135px; /* Default top margin */
+    list-style: none; /* Remove default list styling */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+    display: flex; /* Enable flexbox for the list */
+    flex-direction: column; /* Align items vertically */
+    align-items: center; /* Center items horizontally */
 }
 
-li{
-    border-style: none none none solid;
-    border-radius: 10px;
+lii {
+    width: 30px; /* Set width for the circle */
+    height: 30px; /* Set height for the circle */
+    border-radius: 80%; /* Make it a circle */
+    display: flex; /* Enable flexbox for centering */
+    align-items: center; /* Center items vertically */
+    justify-content: center; /* Center items horizontally */
+    cursor: pointer; /* Pointer cursor on hover */
+    position: relative; /* Enable absolute positioning for the hover effect */
+    margin: 25px 0; /* Space between dots */
 }
 
+/* Hover effect for onHover */
 li:hover .onHover {
     display: block;
 }
 
 .onHover {
-    background-color: grey;
     padding: 20px;
     border-radius: 10px;
     display: none;
+    position: absolute; /* Position it relative to the li */
+    top: 35px; /* Position below the dot */
+    left: -50%; /* Center it horizontally */
+    transform: translateX(-50%); /* Adjust for center alignment */
+    z-index: 10; /* Ensure it appears above other elements */
 }
 
+/* Color styles for dots */
 .red {
-    border-color: red;
-    background-color: rgba(255, 0, 0, 0.226);
+    background-color: rgb(255, 0, 0); /* Red dot */
 }
 
 .green {
-    border-color: green;
-    background-color: rgba(0, 128, 0, 0.226);
+    background-color: rgb(0, 128, 0); /* Green dot */
 }
 
 .orange {
-    border-color: orange;
-    background-color: rgba(255, 166, 0, 0.226);
+    background-color: rgb(255, 166, 0); /* Orange dot */
 }
 
 .dark {
-    border-color: darkslategrey;
-    background-color: rgba(139, 0, 0, 0.226);
+    background-color: rgb(139, 0, 0); /* Dark dot */
+}
+
+/* Media Queries for smaller screens */
+@media (max-width: 300px) {
+    ull {
+        right: 10px; /* Reduce right margin for smaller screens */
+        top: 50px; /* Reduce top margin for smaller screens */
+    }
+
+    lii {
+        margin: 5px 0; /* Reduce space between dots for smaller screens */
+        width: 20px; /* Smaller dot size */
+        height: 20px; /* Smaller dot size */
+    }
 }

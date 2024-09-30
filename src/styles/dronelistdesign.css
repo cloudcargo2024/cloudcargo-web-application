@@ -1,0 +1,129 @@
+/* General Container Styles */
+.drone-container {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    align-self: flex-end;
+    margin: 40px; /* Outer margin */
+    padding: 30px; /* Inner padding */
+    background-color: #f4f4f4; /* Background color */
+    border-radius: 10px; /* Rounded corners */
+}
+
+/* Header Styles */
+h1 {
+    color: #61dafb; /* Header color */
+}
+
+/* List Styles */
+ul {
+    position: absolute;
+    right: 300px; /* Default right margin */
+    top: 150px; /* Default top margin */
+    list-style: none; /* Remove default list styling */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+    display: flex; /* Enable flexbox for the list */
+    flex-direction: column; /* Align items vertically */
+    align-items: center; /* Center items horizontally */
+}
+
+.drone-list {
+    list-style-type: none;
+    padding: 0; /* Remove padding */
+}
+
+/* Drone Item Styles */
+.drone-item {
+    cursor: pointer;
+    padding: 10px;
+    background-color: #61dafb; /* Background color */
+    color: white; /* Text color */
+    display: flex;
+    justify-content: center; /* Center content */
+    align-items: center; /* Center content */
+    height: 5vh; /* Set height */
+    width: 400px; /* Set width */
+    margin: 10px auto; /* Center margins */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s ease; /* Transition effect */
+    transform: translate(-100px, -5px); /* Move position */
+}
+
+.drone-item:hover {
+    background-color: #ceeaf6; /* Hover effect */
+}
+
+/* Drone Info Overlay Styles */
+.drone-info-overlay {
+    position: fixed; /* Fixed position */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Overlay background */
+    display: flex;
+    justify-content: center; /* Center content */
+    align-items: center; /* Center content */
+}
+
+/* Drone Info Box Styles */
+.drone-info {
+    background-color: #fff; /* White background */
+    padding: 20px; /* Inner padding */
+    border-radius: 10px; /* Rounded corners */
+    width: 300px; /* Set width */
+    text-align: left; /* Left align text */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Shadow effect */
+}
+
+h2 {
+    margin-top: 0; /* Remove top margin */
+}
+
+p {
+    margin: 5px 0; /* Vertical margins */
+}
+
+/* Close Button Styles */
+.close-btn {
+    display: inline-block; /* Inline block for button */
+    margin-top: 15px; /* Top margin */
+    padding: 8px 12px; /* Inner padding */
+    background-color: #f44336; /* Background color */
+    color: white; /* Text color */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor */
+    transition: background-color 0.3s ease; /* Transition effect */
+}
+
+.close-btn:hover {
+    background-color: #d32f2f; /* Hover effect */
+}
+
+/* Front Page Styles */
+.front-page .main,
+.front-page .login_container {
+    color: white; /* Text color for front page */
+}
+
+.front-page h1,
+.front-page p {
+    color: white; /* Front page heading and text color */
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 600px) {
+    ul {
+        right: 80px; /* Reduce right margin for smaller screens */
+        top: 100px; /* Reduce top margin for smaller screens */
+    }
+
+    .drone-item {
+        margin: 20px 0; /* Reduce space between items */
+        width: 50px; /* Smaller item size */
+        height: 25px; /* Smaller item size */
+    }
+}
