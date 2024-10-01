@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { APIProvider, Map, Marker } from '@vis.gl/react-google-maps';
-import { Drone } from '../models/Drone';
-import '../styles/Map.css'
-import logo from '../assets/LogoCC.png';
-import { droneStatusIcons } from '../utils/markerConstants';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { APIProvider, Map, Marker } from "@vis.gl/react-google-maps";
+import { Drone } from "../models/Drone";
+import "../styles/Map.css";
+import logo from "../assets/LogoCC.png";
+import { droneStatusIcons } from "../utils/markerConstants";
+import axios from "axios";
 
 function App() {
   const [DronesList, setDronesList] = useState<Drone[]>([]);
   const [nonUpdateError, setNonUpdateError] = useState<string | null>(null);
   const [updateError, setUpdateError] = useState<string | null>(null);
   const [retryCount, setRetryCount] = useState<number>(5);
-  const API_BASE_URL = "https://66d998da4ad2f6b8ed5550ff.mockapi.io";
+  const API_BASE_URL = "https://66fbf9958583ac93b40e11b7.mockapi.io";
 
   useEffect(() => {
     const fetchDrones = async () => {
@@ -20,7 +20,9 @@ function App() {
         setDronesList(response.data);
       } catch (err) {
         setUpdateError(null);
-        setNonUpdateError("Failed to fetch drone data. Please try again later.");
+        setNonUpdateError(
+          "Failed to fetch drone data. Please try again later."
+        );
       }
     };
 
@@ -30,9 +32,9 @@ function App() {
   useEffect(() => {
     const updateCoordinates = async () => {
       if (retryCount === 0) return;
-      
+
       for (const drone of DronesList) {
-        if (drone.status === "parked") {
+        if (drone.status === "available") {
           continue;
         }
 
@@ -40,18 +42,18 @@ function App() {
           lat: drone.coordinates.lat + 0.001,
           lng: drone.coordinates.lng + 0.001,
         };
+        console.log(drone);
 
-        try {
-          await axios.put(`${API_BASE_URL}/Drone/${drone.id}`, {
-            ...drone,
-            coordinates: newCoordinates,
-          });
-
-        } catch (error) {
-          setUpdateError("Failed to update drones data. Retrying...");
-          setRetryCount((prevCount) => prevCount - 1);
-          continue;
-        }
+        // try {
+        //   await axios.put(`${API_BASE_URL}/Drone/${drone.id}`, {
+        //     ...drone,
+        //     coordinates: newCoordinates,
+        //   });
+        // } catch (error) {
+        //   setUpdateError("Failed to update drones data. Retrying...");
+        //   setRetryCount((prevCount) => prevCount - 1);
+        //   continue;
+        // }
 
         setDronesList((prevDronesList) =>
           prevDronesList.map((d) =>
@@ -66,7 +68,9 @@ function App() {
     if (retryCount === 0) {
       clearInterval(interval);
       setUpdateError(null);
-      setNonUpdateError("Failed to update drones data. Please try again later.")
+      setNonUpdateError(
+        "Failed to update drones data. Please try again later."
+      );
     }
 
     return () => clearInterval(interval);
@@ -81,25 +85,27 @@ function App() {
 
   const zoom = 7.3;
   return (
-    <div className='map-container'>
-      <div className='header'>
-        <img className='logo' src={logo} alt='App Logo' />
-        <p className='map-header'>Track Your Drones!</p>
+    <div className="map-container">
+      <div className="header">
+        <img className="logo" src={logo} alt="App Logo" />
+        <p className="map-header">Track Your Drones!</p>
       </div>
       <APIProvider apiKey={"AIzaSyBBOiWI5PDBmA0QzekL6b8uf3fafaBVLQA"}>
-        <div className='map'>
+        <div className="map">
           <Map
-            style={{ width: '445px', height: '445px'}}
+            style={{ width: "445px", height: "445px" }}
             defaultCenter={{ lat: 45.892176, lng: 24.932724 }}
             defaultZoom={zoom}
             minZoom={zoom - 2}
-            gestureHandling={'cooperative'}
+            gestureHandling={"cooperative"}
             disableDefaultUI={true}
           >
             {DronesList.map((drone) => (
-              <Marker key={drone.id}
+              <Marker
+                key={drone.id}
                 position={drone.coordinates}
-                icon={droneStatusIcons[drone.status]} />
+                icon={droneStatusIcons[drone.status]}
+              />
             ))}
           </Map>
         </div>
