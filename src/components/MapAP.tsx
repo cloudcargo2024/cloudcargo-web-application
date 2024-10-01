@@ -93,7 +93,7 @@ function App() {
       <APIProvider apiKey={"AIzaSyBBOiWI5PDBmA0QzekL6b8uf3fafaBVLQA"}>
         <div className="map">
           <Map
-            style={{ width: "445px", height: "445px" }}
+            style={{ width: "70vw", height: "70vh" }}
             defaultCenter={{ lat: 45.892176, lng: 24.932724 }}
             defaultZoom={zoom}
             minZoom={zoom - 2}

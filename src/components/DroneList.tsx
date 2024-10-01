@@ -149,45 +149,37 @@ const DroneList: React.FC = () => {
       </ul>
 
       {/* Meniul de opțiuni care apare când o dronă este selectată */}
-      {selectedDrone && (
+      {selectedDrone && selectedDrone.status === "available" && (
         <div className="drone-menu">
           <h3>{selectedDrone.name} Options</h3>
           <ul>
-            <li onClick={handleViewStatus}>View Status</li>
-            <li onClick={handleEditDrone}>Edit Drone</li>
-            <li onClick={handleToggleStatus}>
-              {selectedDrone.status === "available"
-                ? "Mark as In Use"
-                : "Mark as Available"}
-            </li>
-            <li onClick={handleRemoveDrone}>Remove Drone</li>
+            <label>Choose packet</label>
+            <form>
+              <label>
+                <input type="radio" name="options" value="1" />
+                Option 1
+              </label>
+
+              <label>
+                <input type="radio" name="options" value="2" />
+                Option 2
+              </label>
+
+              <label>
+                <input type="radio" name="options" value="3" />
+                Option 3
+              </label>
+            </form>
+            <label>Latitude</label>
+            <input></input>
+            <label>Longitude</label>
+            <input></input>
           </ul>
           <button className="close-menu" onClick={handleCloseMenu}>
-            Close Menu
+            Send drone
           </button>
         </div>
       )}
-
-      {/* Formular pentru adăugarea unei noi drone */}
-      <div className="add-drone-form">
-        <h3>Add New Drone</h3>
-        <input
-          type="text"
-          placeholder="Drone name"
-          value={newDroneName}
-          onChange={(e) => setNewDroneName(e.target.value)}
-        />
-        <select
-          value={newDroneStatus}
-          onChange={(e) =>
-            setNewDroneStatus(e.target.value as "available" | "delivering")
-          }
-        >
-          <option value="available">Available</option>
-          <option value="in-use">In Use</option>
-        </select>
-        <button onClick={handleAddDrone}>Add Drone</button>
-      </div>
     </div>
   );
 };
