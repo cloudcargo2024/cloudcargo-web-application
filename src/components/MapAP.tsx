@@ -11,7 +11,7 @@ function App() {
   const [nonUpdateError, setNonUpdateError] = useState<string | null>(null);
   const [updateError, setUpdateError] = useState<string | null>(null);
   const [retryCount, setRetryCount] = useState<number>(5);
-  const API_BASE_URL = "https://66fbf9958583ac93b40e11b7.mockapi.io";
+  const API_BASE_URL = "https://66fbf91c8583ac93b40e0f30.mockapi.io";
 
   useEffect(() => {
     const fetchDrones = async () => {

@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import "../styles/DroneList2.css";
 import axios from "axios";
 import { Drone } from "../models/Drone";
+import DroneFlight from "./DroneFlight";
 
 const DroneList: React.FC = () => {
-  const API_BASE_URL = "https://66fbf9958583ac93b40e11b7.mockapi.io/";
+  const API_BASE_URL = "https://66fbf91c8583ac93b40e0f30.mockapi.io/";
 
   const defaultLat = 46.7712;
   const defaultLng = 23.6236;
@@ -138,9 +139,7 @@ const DroneList: React.FC = () => {
               onClick={() => handleDroneClick(drone)}
             >
               <span className="drone-name">{drone.name}</span>
-              <span className="drone-status">
-                {drone.status === "available" ? "Available" : "In use"}
-              </span>
+              <span className="drone-status">{drone.status}</span>
             </li>
           ))
         ) : (
@@ -151,23 +150,38 @@ const DroneList: React.FC = () => {
       {/* Meniul de opțiuni care apare când o dronă este selectată */}
       {selectedDrone && selectedDrone.status === "available" && (
         <div className="drone-menu">
-          <h3>{selectedDrone.name} Options</h3>
+          <h3>{selectedDrone.name} options</h3>
           <ul>
             <label>Choose packet</label>
             <form>
-              <label>
-                <input type="radio" name="options" value="1" />
-                Option 1
+              <label className="option">
+                <input
+                  className="input"
+                  type="radio"
+                  name="options"
+                  value="1"
+                />
+                Adrenaline
               </label>
 
-              <label>
-                <input type="radio" name="options" value="2" />
-                Option 2
+              <label className="option">
+                <input
+                  className="input"
+                  type="radio"
+                  name="options"
+                  value="2"
+                />
+                Missing person
               </label>
 
-              <label>
-                <input type="radio" name="options" value="3" />
-                Option 3
+              <label className="option">
+                <input
+                  className="input"
+                  type="radio"
+                  name="options"
+                  value="3"
+                />
+                Other
               </label>
             </form>
             <label>Latitude</label>
@@ -175,8 +189,9 @@ const DroneList: React.FC = () => {
             <label>Longitude</label>
             <input></input>
           </ul>
+          <DroneFlight />
           <button className="close-menu" onClick={handleCloseMenu}>
-            Send drone
+            Close menu
           </button>
         </div>
       )}
