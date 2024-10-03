@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 
-export default function DroneFlight() {
+interface DroneFlightProps {
+  onToggleStatus: () => void;
+}
+
+const DroneFlight: React.FC<DroneFlightProps> = ({ onToggleStatus }) => {
   async function sendCommand(command: string) {
     fetch(`/api/drone-flight/${command}`, {
       method: "POST",
@@ -54,6 +58,11 @@ export default function DroneFlight() {
     }
   }
 
+  function handleButtonClick() {
+    onToggleStatus();
+    sendMultipleCommands();
+  }
+
   const myStyle = {
     marginTop: "12px",
     padding: "10px",
@@ -68,7 +77,7 @@ export default function DroneFlight() {
 
   return (
     <>
-      <button style={myStyle} onClick={() => sendMultipleCommands()}>
+      <button style={myStyle} onClick={handleButtonClick}>
         Flight
       </button>
       {/* <button onClick={() => processEvent("appstart")}>Start app</button>
@@ -86,4 +95,6 @@ export default function DroneFlight() {
       <button onClick={() => processEvent("right")}>Right</button> */}
     </>
   );
-}
+};
+
+export default DroneFlight;

@@ -82,6 +82,29 @@ const DroneList: React.FC = () => {
     }
   };
 
+  const handleToggleStatusApi = () => {
+    if (selectedDrone) {
+      const updatedStatus =
+        selectedDrone.status === "available" ? "delivering" : "available";
+      drones.map((drone) =>
+        drone.id === selectedDrone.id
+          ? axios
+              .put(`${API_BASE_URL}/Drone/${selectedDrone.id}`, {
+                ...drone,
+                status: updatedStatus,
+              })
+              .then(function (response) {
+                console.log(response);
+              })
+              .catch(function (error) {
+                console.log(error);
+              })
+          : drone
+      );
+    }
+    handleToggleStatus();
+  };
+
   const handleAddDrone = () => {
     if (newDroneName.trim() !== "") {
       const newDrone: Drone = {
@@ -189,7 +212,7 @@ const DroneList: React.FC = () => {
             <label>Longitude</label>
             <input></input>
           </ul>
-          <DroneFlight />
+          <DroneFlight onToggleStatus={handleToggleStatusApi} />
           <button className="close-menu" onClick={handleCloseMenu}>
             Close menu
           </button>
