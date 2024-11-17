@@ -47,7 +47,8 @@ const DroneFlight: React.FC<DroneFlightProps> = ({ onToggleStatus }) => {
       "rotateleft",
       "rotateright",
       "rotateright",
-      "land",
+      "down",
+      "down",
       "land",
       "stop",
     ];
