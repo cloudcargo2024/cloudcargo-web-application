@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 
-export default function DroneFlight() {
+interface DroneFlightProps {
+  onToggleStatus: () => void;
+}
+
+const DroneFlight: React.FC<DroneFlightProps> = ({ onToggleStatus }) => {
   async function sendCommand(command: string) {
     fetch(`/api/drone-flight/${command}`, {
       method: "POST",
@@ -30,25 +34,53 @@ export default function DroneFlight() {
 
   async function sendMultipleCommands() {
     const commands = [
-      "up",
       "takeoff",
+      "up",
+      "default",
+      "default",
+      "default",
+      "default",
+      "default",
+      "default",
+      "rotateleft",
       "rotateleft",
       "rotateleft",
       "rotateright",
       "rotateright",
+      "down",
+      "down",
+      "land",
       "stop",
     ];
 
     for (const command of commands) {
       await processEvent(command); // Send the command
-      await delay(1000); // Wait for 3 seconds before sending the next command
+      await delay(400); // Wait for 3 seconds before sending the next command
     }
   }
 
+  function handleButtonClick() {
+    onToggleStatus();
+    sendMultipleCommands();
+  }
+
+  const myStyle = {
+    marginTop: "12px",
+    padding: "10px",
+    width: "100%",
+    backgroundColor: "#007bff",
+    color: "white",
+    border: "none",
+    borderRadius: "8px",
+    cursor: "pointer",
+    transition: "background-color 0.3s ease",
+  };
+
   return (
     <>
-      <h1>Drone commands</h1>
-      <button onClick={() => sendMultipleCommands()}>Flight</button>
+      <button style={myStyle} onClick={handleButtonClick}>
+        Flight
+      </button>
       {/* <button onClick={() => processEvent("appstart")}>Start app</button>
       <button onClick={() => processEvent("default")}>Default</button>
       <button onClick={() => processEvent("takeoff")}>Take off</button>
@@ -64,4 +96,6 @@ export default function DroneFlight() {
       <button onClick={() => processEvent("right")}>Right</button> */}
     </>
   );
-}
+};
+
+export default DroneFlight;

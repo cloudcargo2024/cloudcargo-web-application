@@ -1,4 +1,5 @@
 export type Drone = {
+  name: string;
   coordinates: {
     lat: number;
     lng: number;
@@ -7,11 +8,10 @@ export type Drone = {
   status: droneStatus;
 };
 
-export type droneStatus = "parked" | "delivering" | "returning" | "undefined";
-
-type droneCoordinates = {
-  lat: number;
-  lng: number;
-};
+export type droneStatus =
+  | "available"
+  | "delivering"
+  | "returning"
+  | "undefined";
 
 export {};
